@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Emergency Profile | Nur Mohammad</title>
-
-    <meta name="description"
-          content="Emergency identification and contact information for Nur Mohammad">
+    <title>Emergency ID</title>
 
     <style>
         * {
@@ -18,275 +15,496 @@
 
         body {
             font-family: Arial, Helvetica, sans-serif;
-            background: #f2f5f8;
-            color: #17202a;
-            padding: 20px 12px;
-        }
-
-        .container {
-            max-width: 480px;
-            margin: auto;
-        }
-
-        .card {
-            background: #ffffff;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.10);
+            background: #f1f4f7;
+            color: #1f2937;
+            min-height: 100vh;
         }
 
         .header {
-            background: #102a43;
+            background: #b91c1c;
             color: white;
-            padding: 22px 20px;
             text-align: center;
+            padding: 18px 15px;
         }
 
         .header h1 {
-            font-size: 20px;
-            letter-spacing: 1px;
+            font-size: 24px;
+            margin-bottom: 5px;
         }
 
         .header p {
-            margin-top: 5px;
             font-size: 13px;
-            opacity: 0.8;
+            opacity: 0.95;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 520px;
+            margin: 20px auto;
+            padding: 0 14px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-bottom: 15px;
         }
 
         .profile {
             text-align: center;
-            padding: 25px 20px 18px;
+            padding: 25px 20px;
         }
 
-        .photo {
+        .profile-photo {
             width: 105px;
             height: 105px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid #e7edf3;
+            border: 4px solid #e5e7eb;
             margin-bottom: 12px;
+            display: none;
         }
 
-        .name {
+        .profile h2 {
             font-size: 25px;
-            font-weight: 700;
-        }
-
-        .subtitle {
-            color: #6b7785;
-            font-size: 13px;
-            margin-top: 5px;
+            margin-bottom: 5px;
         }
 
         .blood {
             display: inline-block;
-            margin-top: 15px;
-            background: #fff0f0;
-            color: #c62828;
-            padding: 9px 16px;
-            border-radius: 30px;
+            background: #fee2e2;
+            color: #b91c1c;
+            padding: 6px 14px;
+            border-radius: 20px;
             font-weight: bold;
-            font-size: 15px;
+            font-size: 14px;
+            margin-top: 6px;
         }
 
-        .section {
-            padding: 0 20px 20px;
+        .info {
+            padding: 5px 18px 20px;
         }
 
-        .section-title {
-            font-size: 13px;
-            font-weight: bold;
-            color: #6b7785;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            margin-bottom: 10px;
+        .item {
+            padding: 14px 0;
+            border-bottom: 1px solid #e5e7eb;
         }
 
-        .info-box {
-            background: #f7f9fb;
-            border-radius: 12px;
-            padding: 14px;
-            margin-bottom: 10px;
+        .item:last-child {
+            border-bottom: none;
         }
 
         .label {
             font-size: 12px;
-            color: #7b8794;
-            margin-bottom: 4px;
+            color: #6b7280;
+            margin-bottom: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
         }
 
         .value {
             font-size: 15px;
-            font-weight: 600;
+            line-height: 1.5;
+            word-break: break-word;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            padding: 0 18px 20px;
         }
 
         .button {
-            display: block;
+            flex: 1;
             text-decoration: none;
             text-align: center;
-            padding: 13px;
+            padding: 12px 10px;
             border-radius: 10px;
-            margin-top: 9px;
             font-weight: bold;
             font-size: 14px;
+            display: none;
         }
 
         .call {
-            background: #0f9d58;
+            background: #16a34a;
             color: white;
         }
 
         .map {
-            background: #102a43;
+            background: #2563eb;
             color: white;
         }
 
-        .emergency {
-            background: #fff7e6;
-            border-left: 4px solid #f0a000;
-            padding: 13px;
-            border-radius: 10px;
-            font-size: 14px;
+        .emergency-note {
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 13px;
             line-height: 1.5;
+            color: #9a3412;
+            margin-bottom: 15px;
         }
 
         .footer {
             text-align: center;
-            padding: 18px;
-            border-top: 1px solid #edf0f2;
+            color: #6b7280;
             font-size: 11px;
-            color: #8995a1;
+            padding: 10px 0 25px;
         }
 
-        .updated {
-            margin-top: 5px;
+        #loading {
+            text-align: center;
+            padding: 40px 20px;
+            color: #6b7280;
+        }
+
+        #error {
+            display: none;
+            background: white;
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        #error h2 {
+            color: #b91c1c;
+            margin-bottom: 10px;
+        }
+
+        #content {
+            display: none;
         }
     </style>
 </head>
 
 <body>
 
-<div class="container">
+    <div class="header">
+        <h1>🚨 EMERGENCY ID</h1>
+        <p>Emergency Personal Information</p>
+    </div>
 
-    <div class="card">
+    <div class="container">
 
-        <!-- HEADER -->
-        <div class="header">
-            <h1>EMERGENCY ID</h1>
-            <p>Please help me reach my family</p>
+        <div id="loading">
+            Loading emergency information...
         </div>
 
-        <!-- PROFILE -->
-        <div class="profile">
-
-            <!-- পরে এখানে আপনার আসল ছবি দিব -->
-            <img
-                class="photo"
-                src="https://via.placeholder.com/200"
-                alt="Nur Mohammad">
-
-            <div class="name">
-                Nur Mohammad
-            </div>
-
-            <div class="subtitle">
-                Emergency Personal Information
-            </div>
-
-            <div class="blood">
-                🩸 Blood Group: B+
-            </div>
-
+        <div id="error">
+            <h2>Information Not Found</h2>
+            <p id="errorText">
+                Unable to load emergency information.
+            </p>
         </div>
 
-        <!-- EMERGENCY -->
-        <div class="section">
+        <div id="content">
 
-            <div class="section-title">
-                Emergency Contact
-            </div>
+            <div class="card">
 
-            <div class="info-box">
+                <div class="profile">
 
-                <div class="label">
-                    Primary Contact
+                    <img
+                        id="photo"
+                        class="profile-photo"
+                        alt="Profile Photo"
+                    >
+
+                    <h2 id="fullName">-</h2>
+
+                    <div class="blood">
+                        🩸 Blood Group:
+                        <span id="bloodGroup">-</span>
+                    </div>
+
                 </div>
 
-                <div class="value">
-                    Naima Islam
+                <div class="info">
+
+                    <div class="item">
+                        <div class="label">Allergy</div>
+                        <div class="value" id="allergy">-</div>
+                    </div>
+
+                    <div class="item">
+                        <div class="label">Medication</div>
+                        <div class="value" id="medication">-</div>
+                    </div>
+
+                    <div class="item">
+                        <div class="label">Medical Note</div>
+                        <div class="value" id="medicalNote">-</div>
+                    </div>
+
+                    <div class="item">
+                        <div class="label">Present Address</div>
+                        <div class="value" id="presentAddress">-</div>
+                    </div>
+
+                    <div class="item">
+                        <div class="label">Permanent Address</div>
+                        <div class="value" id="permanentAddress">-</div>
+                    </div>
+
                 </div>
 
-                <div class="label" style="margin-top:8px;">
-                    Wife
-                </div>
+                <div class="buttons">
 
-                <a
-                    class="button call"
-                    href="tel:+8801XXXXXXXXX">
-                    📞 Call Emergency Contact
-                </a>
+                    <a
+                        id="callButton"
+                        class="button call"
+                        href="#"
+                    >
+                        📞 Emergency Contact
+                    </a>
+
+                    <a
+                        id="mapButton"
+                        class="button map"
+                        href="#"
+                        target="_blank"
+                    >
+                        📍 View Location
+                    </a>
+
+                </div>
 
             </div>
 
-        </div>
-
-        <!-- MEDICAL -->
-        <div class="section">
-
-            <div class="section-title">
-                Medical Information
-            </div>
-
-            <div class="emergency">
-                <b>⚠️ Important</b><br>
-                Please contact the emergency person above
-                before making non-urgent decisions.
-            </div>
-
-        </div>
-
-        <!-- ADDRESS -->
-        <div class="section">
-
-            <div class="section-title">
-                Address
-            </div>
-
-            <div class="info-box">
-
-                <div class="label">
-                    Present Address
-                </div>
-
-                <div class="value">
-                    Dhaka, Bangladesh
-                </div>
-
-                <a
-                    class="button map"
-                    href="#"
-                    target="_blank">
-                    📍 View Location
-                </a>
-
+            <div class="emergency-note">
+                <strong>Emergency Notice</strong><br>
+                If this person is unconscious, injured, or unable to communicate,
+                please provide necessary medical assistance and contact the family
+                using the emergency contact information.
             </div>
 
         </div>
 
-        <!-- FOOTER -->
         <div class="footer">
-
-            Emergency Profile
-
-            <div class="updated">
-                Last Updated: 22 September 2026
-            </div>
-
+            Emergency Personal Information System
         </div>
 
     </div>
 
-</div>
+
+<script>
+
+    // ================================
+    // GOOGLE APPS SCRIPT API
+    // ================================
+
+    const API_URL =
+        "https://script.google.com/macros/s/AKfycbw7BzJXqgxtk5Ex55qevY8qDF0N36QOOGRuhRBFbo3JFHI7_4chwkpY60Ms-JgGTZoXbQ/exec";
+
+
+    // ================================
+    // GET PROFILE TOKEN FROM URL
+    // ================================
+
+    const params = new URLSearchParams(window.location.search);
+
+    const token = params.get("token");
+
+
+    // ================================
+    // ELEMENTS
+    // ================================
+
+    const loading =
+        document.getElementById("loading");
+
+    const error =
+        document.getElementById("error");
+
+    const errorText =
+        document.getElementById("errorText");
+
+    const content =
+        document.getElementById("content");
+
+
+    // ================================
+    // LOAD PROFILE
+    // ================================
+
+    async function loadProfile() {
+
+        if (!token) {
+
+            loading.style.display = "none";
+
+            error.style.display = "block";
+
+            errorText.textContent =
+                "No profile token was provided.";
+
+            return;
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    API_URL +
+                    "?token=" +
+                    encodeURIComponent(token)
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "API request failed."
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            if (!data.success) {
+
+                throw new Error(
+                    data.error ||
+                    "Profile not found."
+                );
+
+            }
+
+
+            const profile =
+                data.profile;
+
+
+            // ============================
+            // BASIC INFORMATION
+            // ============================
+
+            document.getElementById(
+                "fullName"
+            ).textContent =
+                profile.full_name || "-";
+
+
+            document.getElementById(
+                "bloodGroup"
+            ).textContent =
+                profile.blood_group || "-";
+
+
+            document.getElementById(
+                "allergy"
+            ).textContent =
+                profile.allergy || "-";
+
+
+            document.getElementById(
+                "medication"
+            ).textContent =
+                profile.medication || "-";
+
+
+            document.getElementById(
+                "medicalNote"
+            ).textContent =
+                profile.medical_note || "-";
+
+
+            document.getElementById(
+                "presentAddress"
+            ).textContent =
+                profile.present_address || "-";
+
+
+            document.getElementById(
+                "permanentAddress"
+            ).textContent =
+                profile.permanent_address || "-";
+
+
+            // ============================
+            // PHOTO
+            // ============================
+
+            if (profile.photo_url) {
+
+                const photo =
+                    document.getElementById(
+                        "photo"
+                    );
+
+                photo.src =
+                    profile.photo_url;
+
+                photo.style.display =
+                    "inline-block";
+
+            }
+
+
+            // ============================
+            // MAP
+            // ============================
+
+            if (profile.map_url) {
+
+                const mapButton =
+                    document.getElementById(
+                        "mapButton"
+                    );
+
+                mapButton.href =
+                    profile.map_url;
+
+                mapButton.style.display =
+                    "block";
+
+            }
+
+
+            // ============================
+            // SHOW CONTENT
+            // ============================
+
+            loading.style.display =
+                "none";
+
+            content.style.display =
+                "block";
+
+
+        } catch (err) {
+
+            console.error(err);
+
+            loading.style.display =
+                "none";
+
+            error.style.display =
+                "block";
+
+            errorText.textContent =
+                err.message ||
+                "Unable to load emergency information.";
+
+        }
+
+    }
+
+
+    // ================================
+    // START
+    // ================================
+
+    loadProfile();
+
+</script>
 
 </body>
 </html>
