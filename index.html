@@ -1,609 +1,1648 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Emergency Personal Information</title>
+<title>Emergency Personal Profile</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+
+    background:#eef2f7;
+    color:#172033;
+    line-height:1.5;
+}
+
+.container{
+    width:100%;
+    max-width:720px;
+    margin:auto;
+    padding:14px;
+}
+
+/* =========================
+   TOP EMERGENCY HEADER
+========================= */
+
+.hero{
+    background:linear-gradient(135deg,#b91c1c,#ef4444);
+    color:white;
+    border-radius:22px;
+    padding:25px 20px;
+    text-align:center;
+    margin-bottom:15px;
+    box-shadow:0 10px 30px rgba(185,28,28,.20);
+}
+
+.hero-icon{
+    width:62px;
+    height:62px;
+    margin:auto;
+    border-radius:50%;
+    background:rgba(255,255,255,.18);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:31px;
+    margin-bottom:12px;
+}
+
+.hero h1{
+    font-size:25px;
+    letter-spacing:.3px;
+    margin-bottom:5px;
+}
+
+.hero p{
+    font-size:13px;
+    opacity:.92;
+}
+
+/* =========================
+   PROFILE CARD
+========================= */
+
+.profile-card{
+    background:white;
+    border-radius:22px;
+    padding:22px;
+    margin-bottom:15px;
+    box-shadow:0 5px 25px rgba(15,23,42,.07);
+}
+
+.profile-top{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.profile-photo{
+    width:125px;
+    height:125px;
+    object-fit:cover;
+    border-radius:50%;
+    border:5px solid #f1f5f9;
+    box-shadow:0 5px 18px rgba(0,0,0,.12);
+    flex-shrink:0;
+}
+
+.profile-info{
+    flex:1;
+}
+
+.profile-name{
+    font-size:27px;
+    font-weight:800;
+    color:#102a56;
+    margin-bottom:2px;
+}
+
+.profile-occupation{
+    color:#64748b;
+    font-size:14px;
+    margin-bottom:12px;
+}
+
+.badges{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.badge{
+    background:#eff6ff;
+    color:#1d4ed8;
+    border-radius:20px;
+    padding:5px 10px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.blood-badge{
+    background:#fee2e2;
+    color:#b91c1c;
+}
+
+/* =========================
+   QUICK ACTION
+========================= */
+
+.quick-actions{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    margin-top:18px;
+}
+
+.action{
+    text-decoration:none;
+    padding:11px 6px;
+    text-align:center;
+    border-radius:11px;
+    font-size:12px;
+    font-weight:700;
+    color:white;
+}
+
+.call{
+    background:#16a34a;
+}
+
+.email{
+    background:#2563eb;
+}
+
+.map{
+    background:#7c3aed;
+}
+
+/* =========================
+   SECTION
+========================= */
+
+.section{
+    background:white;
+    border-radius:22px;
+    margin-bottom:15px;
+    padding:20px;
+    box-shadow:0 5px 25px rgba(15,23,42,.06);
+}
+
+.section-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:17px;
+}
+
+.section-icon{
+    width:42px;
+    height:42px;
+    border-radius:13px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+}
+
+.section-title h2{
+    font-size:19px;
+    color:#172033;
+}
+
+/* =========================
+   PERSONAL
+========================= */
+
+.personal-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:13px;
+}
+
+.info-box{
+    background:#f8fafc;
+    border-radius:13px;
+    padding:12px;
+}
+
+.label{
+    color:#64748b;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.4px;
+    margin-bottom:3px;
+}
+
+.value{
+    color:#172033;
+    font-size:14px;
+    font-weight:600;
+    word-break:break-word;
+}
+
+/* =========================
+   MEDICAL
+========================= */
+
+.medical{
+    border:1px solid #fecaca;
+}
+
+.medical .section-icon{
+    background:#fee2e2;
+    color:#dc2626;
+}
+
+.medical-alert{
+    background:#fff7f7;
+    border-left:4px solid #dc2626;
+    border-radius:10px;
+    padding:12px;
+    margin-bottom:12px;
+}
+
+.medical-grid{
+    display:grid;
+    gap:10px;
+}
+
+.medical-item{
+    padding:13px;
+    background:#f8fafc;
+    border-radius:12px;
+}
+
+.medical-item strong{
+    display:block;
+    font-size:12px;
+    color:#64748b;
+    margin-bottom:3px;
+}
+
+/* =========================
+   GUARDIAN
+========================= */
+
+.guardian-section .section-icon{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+.guardian-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.guardian{
+    border:1px solid #e2e8f0;
+    border-radius:16px;
+    padding:14px;
+    background:#fff;
+}
+
+.guardian-top{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    margin-bottom:12px;
+}
+
+.guardian-photo{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    object-fit:cover;
+    background:#e2e8f0;
+}
+
+.guardian-name{
+    font-size:15px;
+    font-weight:800;
+}
+
+.guardian-relation{
+    color:#64748b;
+    font-size:12px;
+}
+
+.call-guardian{
+    display:block;
+    text-align:center;
+    text-decoration:none;
+    background:#16a34a;
+    color:white;
+    padding:10px;
+    border-radius:10px;
+    font-size:13px;
+    font-weight:700;
+}
+
+/* =========================
+   ADDRESS
+========================= */
+
+.address-section .section-icon{
+    background:#dbeafe;
+    color:#2563eb;
+}
+
+.address-box{
+    background:#f8fafc;
+    padding:14px;
+    border-radius:13px;
+    margin-bottom:10px;
+}
+
+.address-label{
+    color:#64748b;
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+}
+
+.address-value{
+    font-size:14px;
+    font-weight:600;
+    margin-top:3px;
+}
+
+.map-button{
+    display:block;
+    text-align:center;
+    text-decoration:none;
+    background:#2563eb;
+    color:white;
+    padding:12px;
+    border-radius:11px;
+    font-weight:700;
+    margin-top:10px;
+}
+
+/* =========================
+   SOCIAL
+========================= */
+
+.social-section .section-icon{
+    background:#ede9fe;
+    color:#7c3aed;
+}
+
+.social-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.social-link{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:13px;
+    border-radius:13px;
+    text-decoration:none;
+    background:#f8fafc;
+    color:#172033;
+    font-weight:700;
+    font-size:13px;
+}
+
+.social-icon{
+    width:35px;
+    height:35px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#e2e8f0;
+    font-size:17px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+    background:#172033;
+    color:#cbd5e1;
+    border-radius:18px;
+    padding:18px;
+    text-align:center;
+    font-size:11px;
+    margin-bottom:15px;
+}
+
+.footer strong{
+    color:white;
+}
+
+/* =========================
+   LOADING
+========================= */
+
+.loading{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:#64748b;
+    padding:20px;
+}
+
+.spinner{
+    width:40px;
+    height:40px;
+    border:4px solid #e2e8f0;
+    border-top-color:#2563eb;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+    margin:0 auto 15px;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.error{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    text-align:center;
+    color:#b91c1c;
+}
+
+.hidden{
+    display:none !important;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:560px){
+
+    .container{
+        padding:10px;
     }
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f1f5f9;
-      color: #111827;
+    .profile-top{
+        flex-direction:column;
+        text-align:center;
     }
 
-    .container {
-      max-width: 520px;
-      margin: auto;
-      padding: 15px;
+    .profile-photo{
+        width:135px;
+        height:135px;
     }
 
-    .header {
-      background: #b91c1c;
-      color: white;
-      padding: 22px 18px;
-      border-radius: 0 0 18px 18px;
-      text-align: center;
-      margin-bottom: 15px;
+    .profile-name{
+        font-size:25px;
     }
 
-    .header h1 {
-      margin: 0;
-      font-size: 24px;
+    .badges{
+        justify-content:center;
     }
 
-    .header p {
-      margin: 7px 0 0;
-      font-size: 14px;
+    .personal-grid,
+    .guardian-grid{
+        grid-template-columns:1fr;
     }
 
-    .profile-card {
-      background: white;
-      border-radius: 16px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-      margin-bottom: 15px;
+    .quick-actions{
+        grid-template-columns:1fr 1fr 1fr;
     }
 
-    .profile-photo {
-      width: 120px;
-      height: 120px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 4px solid #e5e7eb;
-      margin-bottom: 10px;
+    .section{
+        padding:17px;
     }
 
-    .profile-name {
-      font-size: 25px;
-      font-weight: bold;
-      margin: 5px 0;
-    }
+}
 
-    .dob {
-      color: #6b7280;
-      font-size: 14px;
-    }
-
-    .blood {
-      display: inline-block;
-      margin-top: 12px;
-      background: #fee2e2;
-      color: #b91c1c;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-weight: bold;
-      font-size: 18px;
-    }
-
-    .section {
-      background: white;
-      border-radius: 16px;
-      padding: 18px;
-      margin-bottom: 15px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.06);
-    }
-
-    .section h2 {
-      margin: 0 0 14px;
-      font-size: 18px;
-      color: #111827;
-    }
-
-    .item {
-      margin-bottom: 13px;
-    }
-
-    .label {
-      font-size: 12px;
-      color: #6b7280;
-      margin-bottom: 3px;
-    }
-
-    .value {
-      font-size: 15px;
-      font-weight: 500;
-      word-break: break-word;
-    }
-
-    .contact {
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 13px;
-      margin-bottom: 12px;
-    }
-
-    .contact:last-child {
-      margin-bottom: 0;
-    }
-
-    .contact-name {
-      font-weight: bold;
-      font-size: 17px;
-    }
-
-    .contact-relation {
-      color: #6b7280;
-      font-size: 13px;
-      margin: 3px 0 10px;
-    }
-
-    .call-button,
-    .map-button {
-      display: block;
-      width: 100%;
-      text-align: center;
-      text-decoration: none;
-      color: white;
-      padding: 12px;
-      border-radius: 10px;
-      font-weight: bold;
-      margin-top: 8px;
-    }
-
-    .call-button {
-      background: #16a34a;
-    }
-
-    .map-button {
-      background: #2563eb;
-    }
-
-    .loading,
-    .error {
-      text-align: center;
-      padding: 40px 15px;
-      font-size: 16px;
-    }
-
-    .error {
-      color: #b91c1c;
-    }
-
-    .footer {
-      text-align: center;
-      color: #6b7280;
-      font-size: 12px;
-      padding: 10px 0 25px;
-    }
-
-    .hidden {
-      display: none;
-    }
-  </style>
+</style>
 </head>
+
 
 <body>
 
-  <div id="loading" class="loading">
-    Loading emergency information...
-  </div>
+<div id="loading" class="loading">
 
-  <div id="error" class="error hidden"></div>
+    <div>
 
-  <div id="content" class="hidden">
+        <div class="spinner"></div>
 
-    <div class="header">
-      <h1>🚨 Emergency Information</h1>
-      <p>Important information for emergency situations</p>
+        <div>
+            Loading emergency information...
+        </div>
+
     </div>
 
-    <div class="container">
+</div>
 
-      <!-- PROFILE -->
-      <div class="profile-card">
+
+<div id="error" class="error hidden"></div>
+
+
+<div id="content" class="hidden">
+
+<div class="container">
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<div class="hero">
+
+    <div class="hero-icon">
+        🚨
+    </div>
+
+    <h1>EMERGENCY INFORMATION</h1>
+
+    <p>
+        Important personal information for emergency assistance
+    </p>
+
+</div>
+
+
+<!-- =========================
+     PROFILE
+========================= -->
+
+<div class="profile-card">
+
+    <div class="profile-top">
 
         <img
-          id="photo"
-          class="profile-photo hidden"
-          alt="Profile Photo"
+            id="photo"
+            class="profile-photo hidden"
+            alt="Profile Photo"
         >
 
-        <div id="name" class="profile-name"></div>
+        <div class="profile-info">
 
-        <div id="dob" class="dob"></div>
+            <div
+                id="name"
+                class="profile-name">
+            </div>
 
-        <div id="blood" class="blood"></div>
+            <div
+                id="occupation"
+                class="profile-occupation">
+            </div>
 
-      </div>
+            <div class="badges">
 
+                <div
+                    id="blood"
+                    class="badge blood-badge">
+                </div>
 
-      <!-- MEDICAL -->
-      <div class="section">
+                <div
+                    id="gender"
+                    class="badge hidden">
+                </div>
 
-        <h2>🏥 Medical Information</h2>
+                <div
+                    id="nationality"
+                    class="badge hidden">
+                </div>
 
-        <div class="item">
-          <div class="label">Allergy</div>
-          <div id="allergy" class="value"></div>
-        </div>
-
-        <div class="item">
-          <div class="label">Current Medication</div>
-          <div id="medication" class="value"></div>
-        </div>
-
-        <div class="item">
-          <div class="label">Medical Note</div>
-          <div id="medical_note" class="value"></div>
-        </div>
-
-      </div>
-
-
-      <!-- EMERGENCY CONTACTS -->
-      <div class="section">
-
-        <h2>🚨 Emergency Contacts</h2>
-
-        <div id="contact1" class="contact hidden">
-
-          <div id="contact1_name" class="contact-name"></div>
-
-          <div id="contact1_relation" class="contact-relation"></div>
-
-          <a id="contact1_phone"
-             class="call-button"
-             href="#">
-            📞 Call
-          </a>
+            </div>
 
         </div>
-
-
-        <div id="contact2" class="contact hidden">
-
-          <div id="contact2_name" class="contact-name"></div>
-
-          <div id="contact2_relation" class="contact-relation"></div>
-
-          <a id="contact2_phone"
-             class="call-button"
-             href="#">
-            📞 Call
-          </a>
-
-        </div>
-
-      </div>
-
-
-      <!-- ADDRESS -->
-      <div class="section">
-
-        <h2>📍 Address</h2>
-
-        <div class="item">
-
-          <div class="label">Present Address</div>
-
-          <div id="present_address" class="value"></div>
-
-        </div>
-
-
-        <div class="item">
-
-          <div class="label">Permanent Address</div>
-
-          <div id="permanent_address" class="value"></div>
-
-        </div>
-
-
-        <a id="map_button"
-           class="map-button hidden"
-           href="#"
-           target="_blank">
-          📍 Open Location in Google Maps
-        </a>
-
-      </div>
-
-
-      <div class="footer">
-        This information is provided for emergency identification and assistance.
-      </div>
 
     </div>
 
-  </div>
+
+    <div class="quick-actions">
+
+        <a
+            id="phoneButton"
+            class="action call hidden"
+            href="#">
+            📞 Call
+        </a>
+
+        <a
+            id="emailButton"
+            class="action email hidden"
+            href="#">
+            ✉ Email
+        </a>
+
+        <a
+            id="mapQuickButton"
+            class="action map hidden"
+            href="#"
+            target="_blank">
+            📍 Location
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     PERSONAL INFORMATION
+========================= -->
+
+<div class="section">
+
+    <div class="section-title">
+
+        <div class="section-icon"
+             style="background:#dbeafe;color:#2563eb;">
+            👤
+        </div>
+
+        <h2>Personal Information</h2>
+
+    </div>
+
+
+    <div class="personal-grid">
+
+        <div class="info-box">
+
+            <div class="label">
+                Date of Birth
+            </div>
+
+            <div
+                id="dob"
+                class="value">
+            </div>
+
+        </div>
+
+
+        <div class="info-box">
+
+            <div class="label">
+                Marital Status
+            </div>
+
+            <div
+                id="marital"
+                class="value">
+            </div>
+
+        </div>
+
+
+        <div class="info-box">
+
+            <div class="label">
+                Nationality
+            </div>
+
+            <div
+                id="nationalityInfo"
+                class="value">
+            </div>
+
+        </div>
+
+
+        <div class="info-box">
+
+            <div class="label">
+                Blood Group
+            </div>
+
+            <div
+                id="bloodInfo"
+                class="value">
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     MEDICAL
+========================= -->
+
+<div class="section medical">
+
+    <div class="section-title">
+
+        <div class="section-icon">
+            🩺
+        </div>
+
+        <h2>Medical Information</h2>
+
+    </div>
+
+
+    <div class="medical-alert">
+
+        <strong>
+            ⚠ Important Medical Information
+        </strong>
+
+        <div style="font-size:12px;margin-top:4px;">
+            Please provide this information to medical professionals during an emergency.
+        </div>
+
+    </div>
+
+
+    <div class="medical-grid">
+
+        <div class="medical-item">
+
+            <strong>ALLERGY</strong>
+
+            <div id="allergy"></div>
+
+        </div>
+
+
+        <div class="medical-item">
+
+            <strong>CURRENT MEDICATION</strong>
+
+            <div id="medication"></div>
+
+        </div>
+
+
+        <div class="medical-item">
+
+            <strong>MEDICAL NOTE</strong>
+
+            <div id="medical_note"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     GUARDIAN
+========================= -->
+
+<div
+    id="guardianSection"
+    class="section guardian-section hidden">
+
+    <div class="section-title">
+
+        <div class="section-icon">
+            👨‍👩‍👦
+        </div>
+
+        <h2>Guardian / Emergency Contacts</h2>
+
+    </div>
+
+
+    <div class="guardian-grid">
+
+
+        <!-- GUARDIAN 1 -->
+
+        <div
+            id="guardian1"
+            class="guardian hidden">
+
+            <div class="guardian-top">
+
+                <img
+                    id="guardian1Photo"
+                    class="guardian-photo hidden"
+                    alt="Guardian">
+
+                <div>
+
+                    <div
+                        id="guardian1Name"
+                        class="guardian-name">
+                    </div>
+
+                    <div
+                        id="guardian1Relation"
+                        class="guardian-relation">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <a
+                id="guardian1Call"
+                class="call-guardian"
+                href="#">
+                📞 Call
+            </a>
+
+        </div>
+
+
+        <!-- GUARDIAN 2 -->
+
+        <div
+            id="guardian2"
+            class="guardian hidden">
+
+            <div class="guardian-top">
+
+                <img
+                    id="guardian2Photo"
+                    class="guardian-photo hidden"
+                    alt="Guardian">
+
+                <div>
+
+                    <div
+                        id="guardian2Name"
+                        class="guardian-name">
+                    </div>
+
+                    <div
+                        id="guardian2Relation"
+                        class="guardian-relation">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <a
+                id="guardian2Call"
+                class="call-guardian"
+                href="#">
+                📞 Call
+            </a>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     ADDRESS
+========================= -->
+
+<div class="section address-section">
+
+    <div class="section-title">
+
+        <div class="section-icon">
+            📍
+        </div>
+
+        <h2>Address & Location</h2>
+
+    </div>
+
+
+    <div class="address-box">
+
+        <div class="address-label">
+            Present Address
+        </div>
+
+        <div
+            id="present_address"
+            class="address-value">
+        </div>
+
+    </div>
+
+
+    <div class="address-box">
+
+        <div class="address-label">
+            Permanent Address
+        </div>
+
+        <div
+            id="permanent_address"
+            class="address-value">
+        </div>
+
+    </div>
+
+
+    <a
+        id="mapButton"
+        class="map-button hidden"
+        href="#"
+        target="_blank">
+
+        📍 Open Location in Google Maps
+
+    </a>
+
+</div>
+
+
+<!-- =========================
+     SOCIAL
+========================= -->
+
+<div
+    id="socialSection"
+    class="section social-section hidden">
+
+    <div class="section-title">
+
+        <div class="section-icon">
+            🌐
+        </div>
+
+        <h2>Public / Social Information</h2>
+
+    </div>
+
+
+    <div class="social-grid">
+
+
+        <a
+            id="facebook"
+            class="social-link hidden"
+            href="#"
+            target="_blank">
+
+            <div class="social-icon">
+                f
+            </div>
+
+            Facebook
+
+        </a>
+
+
+        <a
+            id="instagram"
+            class="social-link hidden"
+            href="#"
+            target="_blank">
+
+            <div class="social-icon">
+                ◎
+            </div>
+
+            Instagram
+
+        </a>
+
+
+        <a
+            id="linkedin"
+            class="social-link hidden"
+            href="#"
+            target="_blank">
+
+            <div class="social-icon">
+                in
+            </div>
+
+            LinkedIn
+
+        </a>
+
+
+        <a
+            id="github"
+            class="social-link hidden"
+            href="#"
+            target="_blank">
+
+            <div class="social-icon">
+                ◉
+            </div>
+
+            GitHub
+
+        </a>
+
+
+        <a
+            id="website"
+            class="social-link hidden"
+            href="#"
+            target="_blank">
+
+            <div class="social-icon">
+                🌐
+            </div>
+
+            Website
+
+        </a>
+
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<div class="footer">
+
+    <strong>
+        Emergency Personal Profile
+    </strong>
+
+    <br>
+
+    This information is provided for
+    emergency identification and assistance.
+
+    <br><br>
+
+    Please respect the privacy of the profile owner.
+
+</div>
+
+
+</div>
+
+</div>
 
 
 <script>
 
+/* =================================
+   API
+================================= */
+
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbw7BzJXqgxtk5Ex55qevY8qDF0N36QOOGRuhRBFbo3JFHI7_4chwkpY60Ms-JgGTZoXbQ/exec";
+"https://script.google.com/macros/s/AKfycbw7BzJXqgxtk5Ex55qevY8qDF0N36QOOGRuhRBFbo3JFHI7_4chwkpY60Ms-JgGTZoXbQ/exec";
 
 
-function getToken() {
+/* =================================
+   GET TOKEN
+================================= */
 
-  const params = new URLSearchParams(
-    window.location.search
-  );
+function getToken(){
 
-  return params.get("token");
-}
-
-
-function formatDate(dateString) {
-
-  if (!dateString) return "";
-
-  const date = new Date(dateString);
-
-  if (isNaN(date.getTime())) {
-    return dateString;
-  }
-
-  return date.toLocaleDateString(
-    "en-GB",
-    {
-      day: "2-digit",
-      month: "long",
-      year: "numeric"
-    }
-  );
-}
-
-
-function setText(id, value) {
-
-  const element = document.getElementById(id);
-
-  if (element) {
-    element.textContent = value || "Not available";
-  }
-
-}
-
-
-function setupContact(number, profile) {
-
-  const name =
-    profile[`emergency_contact_${number}_name`];
-
-  const relation =
-    profile[`emergency_contact_${number}_relation`];
-
-  const phone =
-    profile[`emergency_contact_${number}_phone`];
-
-  const box =
-    document.getElementById(`contact${number}`);
-
-  if (!name && !phone) {
-    return;
-  }
-
-  box.classList.remove("hidden");
-
-  setText(
-    `contact${number}_name`,
-    name
-  );
-
-  setText(
-    `contact${number}_relation`,
-    relation
-  );
-
-  const button =
-    document.getElementById(
-      `contact${number}_phone`
-    );
-
-  if (phone) {
-
-    button.href =
-      "tel:" + phone;
-
-    button.textContent =
-      "📞 Call " + phone;
-
-  } else {
-
-    button.classList.add("hidden");
-
-  }
-
-}
-
-
-async function loadProfile() {
-
-  const token = getToken();
-
-  if (!token) {
-
-    showError(
-      "Profile token is missing."
-    );
-
-    return;
-  }
-
-
-  try {
-
-    const response =
-      await fetch(
-        API_URL +
-        "?token=" +
-        encodeURIComponent(token)
-      );
-
-
-    const data =
-      await response.json();
-
-
-    if (!data.success) {
-
-      showError(
-        data.error ||
-        "Profile not found."
-      );
-
-      return;
-    }
-
-
-    const profile =
-      data.profile;
-
-
-    // PROFILE
-
-    setText(
-      "name",
-      profile.full_name
-    );
-
-
-    setText(
-      "dob",
-      profile.date_of_birth
-        ? "Date of Birth: " +
-          formatDate(profile.date_of_birth)
-        : ""
-    );
-
-
-    setText(
-      "blood",
-      profile.blood_group
-        ? "Blood Group: " +
-          profile.blood_group
-        : "Blood Group: Unknown"
-    );
-
-
-    // PHOTO
-
-    if (profile.photo_url) {
-
-      const photo =
-        document.getElementById("photo");
-
-      photo.src =
-        profile.photo_url;
-
-      photo.classList.remove(
-        "hidden"
-      );
-
-    }
-
-
-    // MEDICAL
-
-    setText(
-      "allergy",
-      profile.allergy
-    );
-
-    setText(
-      "medication",
-      profile.medication
-    );
-
-    setText(
-      "medical_note",
-      profile.medical_note
-    );
-
-
-    // CONTACTS
-
-    setupContact(
-      1,
-      profile
-    );
-
-    setupContact(
-      2,
-      profile
-    );
-
-
-    // ADDRESS
-
-    setText(
-      "present_address",
-      profile.present_address
-    );
-
-    setText(
-      "permanent_address",
-      profile.permanent_address
-    );
-
-
-    // MAP
-
-    if (profile.map_url) {
-
-      const mapButton =
-        document.getElementById(
-          "map_button"
+    const params =
+        new URLSearchParams(
+            window.location.search
         );
 
-      mapButton.href =
-        profile.map_url;
+    return params.get("token");
 
-      mapButton.classList.remove(
-        "hidden"
-      );
+}
+
+
+/* =================================
+   SET TEXT
+================================= */
+
+function setText(id,value){
+
+    const element =
+        document.getElementById(id);
+
+    if(!element) return;
+
+    element.textContent =
+        value || "Not available";
+
+}
+
+
+/* =================================
+   OPTIONAL ELEMENT
+================================= */
+
+function optionalText(id,value){
+
+    const element =
+        document.getElementById(id);
+
+    if(!element) return;
+
+    if(value){
+
+        element.textContent = value;
+
+        element.classList.remove(
+            "hidden"
+        );
+
+    }else{
+
+        element.classList.add(
+            "hidden"
+        );
+
+    }
+
+}
+
+
+/* =================================
+   DATE
+================================= */
+
+function formatDate(value){
+
+    if(!value) return "";
+
+    const date =
+        new Date(value);
+
+    if(isNaN(date.getTime()))
+        return value;
+
+    return date.toLocaleDateString(
+        "en-GB",
+        {
+            day:"2-digit",
+            month:"long",
+            year:"numeric"
+        }
+    );
+
+}
+
+
+/* =================================
+   GUARDIAN
+================================= */
+
+function setupGuardian(
+    number,
+    profile
+){
+
+    const name =
+        profile[
+            `emergency_contact_${number}_name`
+        ];
+
+    const relation =
+        profile[
+            `emergency_contact_${number}_relation`
+        ];
+
+    const phone =
+        profile[
+            `emergency_contact_${number}_phone`
+        ];
+
+    const photo =
+        profile[
+            `guardian_${number}_photo_url`
+        ];
+
+
+    if(!name && !phone)
+        return;
+
+
+    document
+        .getElementById("guardianSection")
+        .classList.remove("hidden");
+
+
+    document
+        .getElementById(`guardian${number}`)
+        .classList.remove("hidden");
+
+
+    setText(
+        `guardian${number}Name`,
+        name
+    );
+
+
+    setText(
+        `guardian${number}Relation`,
+        relation
+    );
+
+
+    const call =
+        document.getElementById(
+            `guardian${number}Call`
+        );
+
+
+    if(phone){
+
+        call.href =
+            "tel:" + phone;
+
+        call.textContent =
+            "📞 Call " + phone;
+
+    }else{
+
+        call.classList.add(
+            "hidden"
+        );
 
     }
 
 
-    document
-      .getElementById("loading")
-      .classList.add("hidden");
+    if(photo){
 
-    document
-      .getElementById("content")
-      .classList.remove("hidden");
+        const img =
+            document.getElementById(
+                `guardian${number}Photo`
+            );
+
+        img.src = photo;
+
+        img.classList.remove(
+            "hidden"
+        );
+
+    }
+
+}
 
 
-  } catch (error) {
+/* =================================
+   SOCIAL
+================================= */
 
-    showError(
-      "Unable to load emergency information."
+function setupSocial(
+    id,
+    url
+){
+
+    if(!url) return;
+
+    const element =
+        document.getElementById(id);
+
+    if(!element) return;
+
+    element.href = url;
+
+    element.classList.remove(
+        "hidden"
     );
 
-  }
+    document
+        .getElementById("socialSection")
+        .classList.remove("hidden");
 
 }
 
 
-function showError(message) {
+/* =================================
+   LOAD PROFILE
+================================= */
 
-  document
-    .getElementById("loading")
-    .classList.add("hidden");
+async function loadProfile(){
 
-  const error =
-    document.getElementById("error");
+    const token =
+        getToken();
 
-  error.textContent =
-    message;
 
-  error.classList.remove(
-    "hidden"
-  );
+    if(!token){
+
+        showError(
+            "Profile token is missing."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const response =
+            await fetch(
+                API_URL +
+                "?token=" +
+                encodeURIComponent(token)
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!data.success){
+
+            showError(
+                data.error ||
+                "Profile not found."
+            );
+
+            return;
+
+        }
+
+
+        const profile =
+            data.profile;
+
+
+        /* PROFILE */
+
+        setText(
+            "name",
+            profile.full_name
+        );
+
+
+        optionalText(
+            "occupation",
+            profile.occupation
+        );
+
+
+        optionalText(
+            "gender",
+            profile.gender
+        );
+
+
+        optionalText(
+            "nationality",
+            profile.nationality
+        );
+
+
+        setText(
+            "dob",
+            formatDate(
+                profile.date_of_birth
+            )
+        );
+
+
+        setText(
+            "blood",
+            profile.blood_group
+                ? "Blood: " +
+                  profile.blood_group
+                : ""
+        );
+
+
+        setText(
+            "bloodInfo",
+            profile.blood_group
+        );
+
+
+        setText(
+            "nationalityInfo",
+            profile.nationality
+        );
+
+
+        setText(
+            "marital",
+            profile.marital_status
+        );
+
+
+        /* PROFILE PHOTO */
+
+        if(profile.photo_url){
+
+            const photo =
+                document.getElementById(
+                    "photo"
+                );
+
+            photo.src =
+                profile.photo_url;
+
+            photo.classList.remove(
+                "hidden"
+            );
+
+        }
+
+
+        /* PHONE */
+
+        if(profile.phone){
+
+            const button =
+                document.getElementById(
+                    "phoneButton"
+                );
+
+            button.href =
+                "tel:" + profile.phone;
+
+            button.classList.remove(
+                "hidden"
+            );
+
+        }
+
+
+        /* EMAIL */
+
+        if(profile.email){
+
+            const button =
+                document.getElementById(
+                    "emailButton"
+                );
+
+            button.href =
+                "mailto:" + profile.email;
+
+            button.classList.remove(
+                "hidden"
+            );
+
+        }
+
+
+        /* MEDICAL */
+
+        setText(
+            "allergy",
+            profile.allergy
+        );
+
+
+        setText(
+            "medication",
+            profile.medication
+        );
+
+
+        setText(
+            "medical_note",
+            profile.medical_note
+        );
+
+
+        /* GUARDIANS */
+
+        setupGuardian(
+            1,
+            profile
+        );
+
+
+        setupGuardian(
+            2,
+            profile
+        );
+
+
+        /* ADDRESS */
+
+        setText(
+            "present_address",
+            profile.present_address
+        );
+
+
+        setText(
+            "permanent_address",
+            profile.permanent_address
+        );
+
+
+        /* MAP */
+
+        if(profile.map_url){
+
+            const map =
+                document.getElementById(
+                    "mapButton"
+                );
+
+            map.href =
+                profile.map_url;
+
+            map.classList.remove(
+                "hidden"
+            );
+
+
+            const quickMap =
+                document.getElementById(
+                    "mapQuickButton"
+                );
+
+            quickMap.href =
+                profile.map_url;
+
+            quickMap.classList.remove(
+                "hidden"
+            );
+
+        }
+
+
+        /* SOCIAL */
+
+        setupSocial(
+            "facebook",
+            profile.facebook
+        );
+
+
+        setupSocial(
+            "instagram",
+            profile.instagram
+        );
+
+
+        setupSocial(
+            "linkedin",
+            profile.linkedin
+        );
+
+
+        setupSocial(
+            "github",
+            profile.github
+        );
+
+
+        setupSocial(
+            "website",
+            profile.website
+        );
+
+
+        /* SHOW */
+
+        document
+            .getElementById("loading")
+            .classList.add("hidden");
+
+
+        document
+            .getElementById("content")
+            .classList.remove("hidden");
+
+
+    }catch(error){
+
+        showError(
+            "Unable to load emergency information."
+        );
+
+        console.error(error);
+
+    }
 
 }
 
+
+/* =================================
+   ERROR
+================================= */
+
+function showError(message){
+
+    document
+        .getElementById("loading")
+        .classList.add("hidden");
+
+
+    const error =
+        document.getElementById(
+            "error"
+        );
+
+
+    error.textContent =
+        message;
+
+
+    error.classList.remove(
+        "hidden"
+    );
+
+}
+
+
+/* START */
 
 loadProfile();
 
